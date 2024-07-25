@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 
 
 // Navbar
-navbar: {
+  navbar: {
     paddingTop: 35,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -96,9 +96,20 @@ navbar: {
     fontWeight: 'bold',
     color: '#FFD700',
     textAlign: 'center',
-  }
+  },
 
+  // Catégorie
+  categoryImage: {
+    width: '100%',
+    height: 200,
+  },
+  description: {
+    margin: 10,
+    fontSize: 16,
+    textAlign: 'center',
+  },
 
+// Produit
 
 
 

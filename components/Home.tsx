@@ -1,9 +1,26 @@
-// components/Home.tsx
-
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import styles from '../assets/css/styles';
 import Layout from './Layout';
+
+interface Category {
+  nom: string;
+  images: any;
+}
+
+interface Product {
+  nom: string;
+  images: any;
+  prix?: string;
+}
+
+type RootStackParamList = {
+  Home: undefined;
+  Categorie: Category;
+  Produit: Product;
+};
 
 const carrouselImages = [
   require('@/assets/images/carrousel.jpg'),
@@ -11,21 +28,31 @@ const carrouselImages = [
   require('@/assets/images/carrousel.jpg')
 ];
 
-const categories = [
+const categories: Category[] = [
   { nom: 'Lit', images: require('@/assets/images/temps.png') },
   { nom: 'Canapé', images: require('@/assets/images/temps.png') },
   { nom: 'Chaise', images: require('@/assets/images/temps.png') },
   { nom: 'Table', images: require('@/assets/images/temps.png') }
 ];
 
-const products = [
-  { nom: 'Table en marbre', images: require('@/assets/images/temps.png') },
-  { nom: 'Chaise en bois', images: require('@/assets/images/temps.png') },
-  { nom: 'Canapé en cuir', images: require('@/assets/images/temps.png') },
-  { nom: 'Lit en métal', images: require('@/assets/images/temps.png') }
+const products: Product[] = [
+  { nom: 'Table en marbre', prix: '500€', images: require('@/assets/images/temps.png') },
+  { nom: 'Chaise en bois', prix: '150€', images: require('@/assets/images/temps.png') },
+  { nom: 'Canapé en cuir', prix: '1200€', images: require('@/assets/images/temps.png') },
+  { nom: 'Lit en métal', prix: '800€', images: require('@/assets/images/temps.png') }
 ];
 
 export default function Home() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleCategoryPress = (category: Category) => {
+    navigation.navigate('Categorie', category);
+  };
+
+  const handleProductPress = (product: Product) => {
+    navigation.navigate('Produit', product);
+  };
+
   return (
     <Layout>
       <ScrollView style={styles.container}>
@@ -40,10 +67,12 @@ export default function Home() {
 
         <View style={styles.itemContainer}>
           {categories.map((c, index) => (
-            <View key={index} style={styles.item}>
-              <Image source={c.images} style={styles.itemImage} />
-              <Text style={styles.itemText}>{c.nom}</Text>
-            </View>
+            <TouchableOpacity key={index} onPress={() => handleCategoryPress(c)}>
+              <View style={styles.item}>
+                <Image source={c.images} style={styles.itemImage} />
+                <Text style={styles.itemText}>{c.nom}</Text>
+              </View>
+            </TouchableOpacity>
           ))}
         </View>
 
@@ -51,10 +80,13 @@ export default function Home() {
 
         <View style={styles.itemContainer}>
           {products.map((p, index) => (
-            <View key={index} style={styles.item}>
-              <Image source={p.images} style={styles.itemImage} />
-              <Text style={styles.itemText}>{p.nom}</Text>
-            </View>
+            <TouchableOpacity key={index} onPress={() => handleProductPress(p)}>
+              <View style={styles.item}>
+                <Image source={p.images} style={styles.itemImage} />
+                <Text style={styles.itemText}>{p.nom}</Text>
+                <Text style={styles.itemText}>{p.prix}</Text>
+              </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
