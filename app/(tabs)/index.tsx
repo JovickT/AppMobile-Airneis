@@ -1,42 +1,60 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { Link } from 'expo-router';
+import styles from '../../assets/css/styles';
+import Navbar from '@/components/Navbar';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const carrouselImages = [
+  require('@/assets/images/carrousel.jpg'),
+  require('@/assets/images/carrousel.jpg'),
+  require('@/assets/images/carrousel.jpg')
+];
+
+const categories = [
+  { nom: 'Lit', images: require('@/assets/images/temps.png') },
+  { nom: 'Canapé', images: require('@/assets/images/temps.png') },
+  { nom: 'Chaise', images: require('@/assets/images/temps.png') },
+  { nom: 'Table', images: require('@/assets/images/temps.png') }
+];
+
+const products = [
+  { nom: 'Table en marbre', images: require('@/assets/images/temps.png') },
+  { nom: 'Chaise en bois', images: require('@/assets/images/temps.png') },
+  { nom: 'Canapé en cuir', images: require('@/assets/images/temps.png') },
+  { nom: 'Lit en métal', images: require('@/assets/images/temps.png') }
+];
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Bonjour la France je vous aime !</ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      <ScrollView horizontal pagingEnabled style={styles.carousel}>
+        {carrouselImages.map((img, index) => (
+          <Image key={index} source={img} style={styles.carouselImage} />
+        ))}
+      </ScrollView>
+
+      <Text style={styles.title}>VENANT DES HAUTE TERRE D'ÉCOSSE</Text>
+      <Text style={styles.title}>NOS MEUBLES SONT IMMORTELS</Text>
+
+      <View style={styles.itemContainer}>
+        {categories.map((c, index) => (
+          <View key={index} style={styles.item}>
+            <Image source={c.images} style={styles.itemImage} />
+            <Text style={styles.itemText}>{c.nom}</Text>
+          </View>
+        ))}
+      </View>
+
+      <Text style={styles.title}>Les Highlanders du moment</Text>
+
+      <View style={styles.itemContainer}>
+        {products.map((p, index) => (
+          <View key={index} style={styles.item}>
+            <Image source={p.images} style={styles.itemImage} />
+            <Text style={styles.itemText}>{p.nom}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
