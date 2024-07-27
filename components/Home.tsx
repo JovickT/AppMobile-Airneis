@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <Layout>
+    // <Layout>
       <ScrollView style={styles.container}>
         <ScrollView horizontal pagingEnabled style={styles.carousel}>
           {carrouselImages.map((img, index) => (
@@ -62,7 +62,7 @@ export default function Home() {
           ))}
         </ScrollView>
 
-        <Text style={styles.title}>VENANT DES HAUTE TERRE D'ÉCOSSE</Text>
+        <Text style={styles.title}>testVENANT DES HAUTE TERRE D'ÉCOSSE</Text>
         <Text style={styles.title}>NOS MEUBLES SONT IMMORTELS</Text>
 
         <View style={styles.itemContainer}>
@@ -90,6 +90,6 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
-    </Layout>
+    // </Layout>
   );
 }

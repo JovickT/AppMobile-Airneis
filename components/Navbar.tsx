@@ -5,7 +5,7 @@ import logo from '@/assets/images/temps.png';
 import searchIcon from '@/assets/images/temps.png';
 import shopIcon from '@/assets/images/temps.png';
 import burgerIcon from '@/assets/images/temps.png';
-import styles from '../assets/css/styles';
+import styles from '@/assets/css/styles';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

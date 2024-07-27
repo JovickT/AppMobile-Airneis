@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import Layout from './Layout';
+import Layout from '@/components/Layout';
 import logo from '@/assets/images/carrousel.jpg';
 
 const Contact = () => {
@@ -15,6 +15,7 @@ const Contact = () => {
   };
 
   return (
+    <Layout>
       <ScrollView contentContainerStyle={styles.container}>
         <Image source={logo} style={styles.logo} resizeMode="contain" />
 
@@ -53,6 +54,7 @@ const Contact = () => {
           <Button title="Envoyer" onPress={handleSubmit} color="#FFD700" />
         </View>
       </ScrollView>
+    </Layout>
   );
 };
 
