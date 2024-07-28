@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, TextInput, Button,TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Layout from './Layout';
 import logo from '@/assets/images/carrousel.jpg';
 
@@ -20,6 +20,7 @@ const Contact = () => {
         <Image source={logo} style={styles.logo} resizeMode="contain" />
 
         <View style={styles.form}>
+          <Text style={styles.label}>Nom :</Text>
           <TextInput
             style={styles.input}
             placeholder="Jones"
@@ -27,6 +28,7 @@ const Contact = () => {
             onChangeText={setNom}
             placeholderTextColor="#888"
           />
+          <Text style={styles.label}>Prénom :</Text>
           <TextInput
             style={styles.input}
             placeholder="John"
@@ -34,6 +36,7 @@ const Contact = () => {
             onChangeText={setPrenom}
             placeholderTextColor="#888"
           />
+          <Text style={styles.label}>Mail :</Text>
           <TextInput
             style={styles.input}
             placeholder="exemple@xyz.fr"
@@ -42,6 +45,7 @@ const Contact = () => {
             keyboardType="email-address"
             placeholderTextColor="#888"
           />
+          <Text style={styles.label}>Message :</Text>
           <TextInput
             style={[styles.input, styles.textarea]}
             placeholder="Message....."
@@ -51,7 +55,9 @@ const Contact = () => {
             numberOfLines={5}
             placeholderTextColor="#888"
           />
-          <Button title="Envoyer" onPress={handleSubmit} color="#FFD700" />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Envoyer</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </Layout>
@@ -75,6 +81,11 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 400,
   },
+  label: {
+    fontSize: 16,
+    color: 'black',
+    marginBottom: 5,
+  },
   input: {
     borderBottomWidth: 1,
     borderColor: 'black',
@@ -84,6 +95,19 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     borderRadius: 0,
+    textTransform: 'uppercase',
+  },
+  button: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#FFD700',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
     textTransform: 'uppercase',
   },
   textarea: {

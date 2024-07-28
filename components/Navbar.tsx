@@ -70,7 +70,7 @@ const Navbar = () => {
         router.push("/about");
         break;
       case 'Mes commandes':
-        router.push("/MesCommandes");
+        router.push("/mesCommandes");
         break;
       default:
         console.error('ce lien n\'existe pas');
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingVertical: 5,
     fontWeight: 'bold',
+    fontSize: 16,
     color: '#FFD700',
     textAlign: 'center',
   },

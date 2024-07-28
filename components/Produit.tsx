@@ -108,19 +108,13 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   button: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderTopColor: 'black',
-    borderBottomColor: 'black',
-    backgroundColor: 'antiquewhite',
-    padding: 10,
+    backgroundColor: '#FFD700',
+    padding: 15,
     marginHorizontal: 20,
     marginVertical: 10,
-    borderRadius: 0,
     alignItems: 'center',
   },
+
   buttonText: {
     color: 'black',
     fontSize: 16,
@@ -132,6 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 10,
+    fontStyle: 'italic',
   },
   itemContainer: {
     flexDirection: 'row',

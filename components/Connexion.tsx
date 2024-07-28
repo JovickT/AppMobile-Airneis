@@ -87,7 +87,9 @@ const Connexion = () => {
           placeholderTextColor="#888"
           secureTextEntry
         />
-        <Button title="Connexion" onPress={handleSubmit} color="#FFD700" />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Connexion</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push('/inscription')}>
           <Text style={styles.signupText}>
@@ -125,6 +127,19 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     textTransform: 'uppercase',
     width: '100%',
+  },
+  button: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#FFD700',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+    textTransform: 'uppercase',
   },
   signupText: {
     marginTop: 20,
