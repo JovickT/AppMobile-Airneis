@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import Layout from './Layout';
-// import styles from '../assets/css/styles';
 
 interface Product {
   nom: string;
@@ -27,6 +27,14 @@ const similarProducts: Product[] = [
 export default function Produit() {
   const route = useRoute<RouteProp<RootStackParamList, 'Produit'>>();
   const { nom, images, prix } = route.params;
+  const router = useRouter();
+
+  const handleProductPress = (product: Product) => {
+    router.push({
+      pathname: '/produit',
+      params: { nom: product.nom, images: product.images, prix: product.prix },
+    });
+  };
 
   return (
     <Layout>
@@ -44,17 +52,21 @@ export default function Produit() {
 
         <Text style={styles.description}>DESCRIPTION</Text>
 
-        <Button title="Ajouter au panier" onPress={() => { /* Logique d'ajout au panier */ }} />
+        <TouchableOpacity style={styles.button} onPress={() => { /* Logique d'ajout au panier */ }}>
+          <Text style={styles.buttonText}>Ajouter au panier</Text>
+        </TouchableOpacity>
 
         <Text style={styles.similarTitle}>Produits similaires</Text>
 
         <View style={styles.itemContainer}>
           {similarProducts.map((p, index) => (
-            <View key={index} style={styles.item}>
+            <TouchableOpacity key={index} style={styles.item} onPress={() => handleProductPress(p)}>
               <Image source={p.images} style={styles.itemImage} />
-              <Text style={styles.itemText}>{p.nom}</Text>
-              <Text style={styles.itemText}>{p.prix}</Text>
-            </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.itemText}>{p.nom}</Text>
+                <Text style={styles.itemPrice}>{p.prix}</Text>
+              </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
@@ -68,11 +80,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   carousel: {
-    height: 200,
+    height: 350,
+    marginTop: 16,
+    paddingLeft: 16,
   },
   carouselImage: {
-    width: 300,
-    height: 200,
+    width: 350,
+    height: 350,
+    marginRight: 10,
+    borderRadius: 10,
   },
   productHeader: {
     flexDirection: 'row',
@@ -91,6 +107,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 20,
   },
+  button: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderTopColor: 'black',
+    borderBottomColor: 'black',
+    backgroundColor: 'antiquewhite',
+    padding: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    borderRadius: 0,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
   similarTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -108,11 +144,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   itemImage: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 200,
+    borderRadius: 10,
+  },
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 300,
   },
   itemText: {
     marginTop: 5,
-    textAlign: 'center',
+    textAlign: 'left',
+    flex: 1,
+  },
+  itemPrice: {
+    marginTop: 5,
+    textAlign: 'right',
+    flex: 1,
+    fontWeight: 'bold',
   },
 });

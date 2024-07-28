@@ -42,63 +42,7 @@ const styles = StyleSheet.create({
   },
 
 
-// Navbar
-  navbar: {
-    paddingTop: 35,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#FFD700',
-    backgroundColor: '#faebd7',
-    padding: 10,
-  },
-  logo: {
-    width: 50,
-    height: 50,
-  },
-  icons: {
-    flexDirection: 'row',
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    marginLeft: 10,
-  },
-  cartBadge: {
-    position: 'absolute',
-    top: -5,
-    right: -5,
-    backgroundColor: '#dc3545',
-    borderRadius: 10,
-    padding: 2,
-    width: 20,
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cartCount: {
-    color: '#fff',
-    fontSize: 12,
-  },
-  dropdown: {
-    position: 'absolute',
-    // marginTop: 45,
-    top: 95,
-    right: 0,
-    backgroundColor: '#faebd7',
-    // border: '1px solid #FFD700',
-    borderRadius: 5,
-    padding: 10,
-  },
-  dropdownLink: {
-    paddingVertical: 5,
-    fontWeight: 'bold',
-    color: '#FFD700',
-    textAlign: 'center',
-  },
-
-  // Catégorie
+// Catégorie
   categoryImage: {
     width: '100%',
     height: 200,
@@ -108,60 +52,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-
-// Produit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

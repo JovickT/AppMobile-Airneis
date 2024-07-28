@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useRouter } from 'expo-router';
 import styles from '../assets/css/styles';
-import Layout from './Layout';
 
 interface Category {
   nom: string;
@@ -15,12 +13,6 @@ interface Product {
   images: any;
   prix?: string;
 }
-
-type RootStackParamList = {
-  Home: undefined;
-  Categorie: Category;
-  Produit: Product;
-};
 
 const carrouselImages = [
   require('@/assets/images/carrousel.jpg'),
@@ -43,53 +35,57 @@ const products: Product[] = [
 ];
 
 export default function Home() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const router = useRouter();
 
   const handleCategoryPress = (category: Category) => {
-    navigation.navigate('Categorie', category);
+    router.push({
+      pathname: '/categorie',
+      params: { nom: category.nom, images: category.images },
+    });
   };
 
   const handleProductPress = (product: Product) => {
-    navigation.navigate('Produit', product);
+    router.push({
+      pathname: '/produit',
+      params: { nom: product.nom, images: product.images, prix: product.prix },
+    });
   };
 
   return (
-    // <Layout>
-      <ScrollView style={styles.container}>
-        <ScrollView horizontal pagingEnabled style={styles.carousel}>
-          {carrouselImages.map((img, index) => (
-            <Image key={index} source={img} style={styles.carouselImage} />
-          ))}
-        </ScrollView>
-
-        <Text style={styles.title}>testVENANT DES HAUTE TERRE D'ÉCOSSE</Text>
-        <Text style={styles.title}>NOS MEUBLES SONT IMMORTELS</Text>
-
-        <View style={styles.itemContainer}>
-          {categories.map((c, index) => (
-            <TouchableOpacity key={index} onPress={() => handleCategoryPress(c)}>
-              <View style={styles.item}>
-                <Image source={c.images} style={styles.itemImage} />
-                <Text style={styles.itemText}>{c.nom}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <Text style={styles.title}>Les Highlanders du moment</Text>
-
-        <View style={styles.itemContainer}>
-          {products.map((p, index) => (
-            <TouchableOpacity key={index} onPress={() => handleProductPress(p)}>
-              <View style={styles.item}>
-                <Image source={p.images} style={styles.itemImage} />
-                <Text style={styles.itemText}>{p.nom}</Text>
-                <Text style={styles.itemText}>{p.prix}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+    <ScrollView style={styles.container}>
+      <ScrollView horizontal pagingEnabled style={styles.carousel}>
+        {carrouselImages.map((img, index) => (
+          <Image key={index} source={img} style={styles.carouselImage} />
+        ))}
       </ScrollView>
-    // </Layout>
+
+      <Text style={styles.title}>VENANT DES HAUTE TERRE D'ÉCOSSE</Text>
+      <Text style={styles.title}>NOS MEUBLES SONT IMMORTELS</Text>
+
+      <View style={styles.itemContainer}>
+        {categories.map((c, index) => (
+          <TouchableOpacity key={index} onPress={() => handleCategoryPress(c)}>
+            <View style={styles.item}>
+              <Image source={c.images} style={styles.itemImage} />
+              <Text style={styles.itemText}>{c.nom}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.title}>Les Highlanders du moment</Text>
+
+      <View style={styles.itemContainer}>
+        {products.map((p, index) => (
+          <TouchableOpacity key={index} onPress={() => handleProductPress(p)}>
+            <View style={styles.item}>
+              <Image source={p.images} style={styles.itemImage} />
+              <Text style={styles.itemText}>{p.nom}</Text>
+              <Text style={styles.itemText}>{p.prix}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
   );
 }

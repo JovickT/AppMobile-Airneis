@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import logo from '@/assets/images/temps.png';
-import searchIcon from '@/assets/images/temps.png';
-import shopIcon from '@/assets/images/temps.png';
-import burgerIcon from '@/assets/images/temps.png';
-import styles from '@/assets/css/styles';
+import logo from '@/assets/images/logo.png';
+import searchIcon from '@/assets/images/recherche.png';
+import shopIcon from '@/assets/images/panier.png';
+import burgerIcon from '@/assets/images/burger.png';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,6 +48,7 @@ const Navbar = () => {
   };
 
   const handleNavigation = (list: string) => {
+    setMenuOpen(false); // Fermer le menu après la navigation
     switch (list) {
       case 'Se connecter':
         router.push("/connexion");
@@ -61,7 +61,7 @@ const Navbar = () => {
         router.push("/cgu");
         break;
       case 'Mentions légales':
-        router.push("/mentions");
+        router.push("/ml");
         break;
       case 'Contact':
         router.push("/contact");
@@ -115,3 +115,63 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const styles = StyleSheet.create({
+  navbar: {
+    paddingTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#FFD700',
+    backgroundColor: '#faebd7',
+    padding: 10,
+    zIndex: 1000,
+  },
+  logo: {
+    width: 70,
+    height: 50,
+  },
+  icons: {
+    flexDirection: 'row',
+  },
+  icon: {
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+  },
+  cartBadge: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    backgroundColor: '#dc3545',
+    borderRadius: 10,
+    padding: 2,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cartCount: {
+    color: '#fff',
+    fontSize: 12,
+  },
+  dropdown: {
+    position: 'absolute',
+    top: 85,
+    right: 0,
+    backgroundColor: '#faebd7',
+    borderWidth: 1,
+    borderColor: '#FFD700',
+    borderRadius: 5,
+    padding: 10,
+    zIndex: 2000,
+  },
+  dropdownLink: {
+    padding: 10,
+    paddingVertical: 5,
+    fontWeight: 'bold',
+    color: '#FFD700',
+    textAlign: 'center',
+  },
+});

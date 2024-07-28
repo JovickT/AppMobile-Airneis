@@ -18,24 +18,54 @@
 //   );
 // }
 
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './components/Home';
-import Layout from './components/Layout';
-import CheckoutLivraison from './components/Categorie';
-import Categorie from './components/Categorie';
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+// import Home from './components/Home';
+// import Layout from './components/Layout';
+// import CheckoutLivraison from './components/Categorie';
+// import Categorie from './components/Categorie';
 
-const App: React.FC = () => {
+// const App: React.FC = () => {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/Categorie" element={<Categorie />} />
+//         <Route path="*" element={<Navigate to="/" />} />
+//       </Routes>
+//     </Router> 
+//   );
+// };
+
+// export default App;
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './components/Home';
+import Categorie from './components/Categorie';
+import Produit from './components/Produit';
+
+type RootStackParamList = {
+  Home: undefined;
+  Categorie: undefined;
+  Produit: { product: { nom: string; images: any; prix?: string } };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Categorie" element={<Categorie />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router> 
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Categorie" component={Categorie} />
+        <Stack.Screen name="Produit" component={Produit} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 export default App;
+
 

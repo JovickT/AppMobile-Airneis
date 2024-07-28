@@ -1,21 +1,13 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import Layout from './Layout';
-// import styles from '../assets/css/styles';
 
 interface Product {
   nom: string;
   images: any;
   prix?: string;
 }
-
-type RootStackParamList = {
-  Categorie: {
-    nom: string;
-    images: any;
-  };
-};
 
 const products: Product[] = [
   { nom: 'Table en marbre', prix: '500€', images: require('@/assets/images/temps.png') },
@@ -25,22 +17,31 @@ const products: Product[] = [
 ];
 
 export default function Categorie() {
-  const route = useRoute<RouteProp<RootStackParamList, 'Categorie'>>();
-  const { nom, images } = route.params;
+  const { nom, images } = useLocalSearchParams();
+  const router = useRouter();
+
+  const handleProductPress = (product: Product) => {
+    router.push({
+      pathname: '/produit',
+      params: { nom: product.nom, images: product.images, prix: product.prix },
+    });
+  };
 
   return (
     <Layout>
       <ScrollView style={styles.container}>
-        <Image source={images} style={styles.categoryImage} />
         <Text style={styles.title}>{nom}</Text>
+        <Image source={images} style={styles.categoryImage} />
         <Text style={styles.description}>Description</Text>
         <View style={styles.itemContainer}>
           {products.map((p, index) => (
-            <View key={index} style={styles.item}>
+            <TouchableOpacity key={index} style={styles.item} onPress={() => handleProductPress(p)}>
               <Image source={p.images} style={styles.itemImage} />
-              <Text style={styles.itemText}>{p.nom}</Text>
-              <Text style={styles.itemText}>{p.prix}</Text>
-            </View>
+              <View style={styles.itemTextContainer}>
+                <Text style={styles.itemName}>{p.nom}</Text>
+                <Text style={styles.itemPrice}>{p.prix}</Text>
+              </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
@@ -53,14 +54,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  categoryImage: {
-    width: '100%',
-    height: 200,
-  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontStyle: 'italic',
+    color: '#FFD700',
+    marginVertical: 10,
+  },
+  categoryImage: {
+    width: '90%',
+    height: 200,
+    alignSelf: 'center',
+    borderRadius: 10,
     marginVertical: 10,
   },
   description: {
@@ -80,11 +86,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   itemImage: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 200,
+    borderRadius: 10,
   },
-  itemText: {
+  itemTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 300,
+    paddingHorizontal: 10,
     marginTop: 5,
-    textAlign: 'center',
+  },
+  itemName: {
+    textAlign: 'left',
+    flex: 1,
+  },
+  itemPrice: {
+    textAlign: 'right',
+    flex: 1,
   },
 });
+
