@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Layout from './Layout';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 const Inscription = () => {
   const [nom, setNom] = useState<string>('');
@@ -9,7 +9,7 @@ const Inscription = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const navigation = useNavigation();
+  const router = useRouter();
 
   const handleSubmit = async () => {
     setError(null);
@@ -19,7 +19,7 @@ const Inscription = () => {
     try {
       // Simuler une inscription réussie
       console.log({ nom, prenom, email, password });
-      navigation.navigate('Login');
+      router.push('/connexion');
     } catch (err) {
       setError('Erreur lors de l\'inscription');
       console.error(err);
@@ -73,7 +73,7 @@ const Inscription = () => {
 
         <View style={styles.footer}>
           <Text>Vous avez déjà un compte? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => router.push('/connexion')}>
             <Text style={styles.link}>Connexion</Text>
           </TouchableOpacity>
         </View>

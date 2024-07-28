@@ -1,25 +1,22 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
+import { useRouter } from 'expo-router';
 import Layout from './Layout';
-import { useAuth } from '../context/AuthContext';
 
 const Connexion = () => {
-  const { connexion } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
-    const lePanier = JSON.parse(localStorage.getItem('panier') || '[]');
-    const leUser = JSON.parse(localStorage.getItem('user') || '[]');
-
-    if (lePanier.length > 0 && leUser !== undefined) {
-      const sendPanierData = async () => {
-        try {
-          const encodedLePanier = encodeURIComponent(JSON.stringify(lePanier));
-          const encodedLeUser = encodeURIComponent(JSON.stringify(leUser));
+    const sendPanierData = async () => {
+      try {
+        const lePanier = await AsyncStorage.getItem('panier');
+        const leUser = await AsyncStorage.getItem('user');
+        if (lePanier && leUser) {
+          const encodedLePanier = encodeURIComponent(lePanier);
+          const encodedLeUser = encodeURIComponent(leUser);
           const url = `https://localhost:8000/panier?test=${encodedLePanier}&user=${encodedLeUser}`;
 
           const response = await fetch(url, {
@@ -35,14 +32,14 @@ const Connexion = () => {
           }
 
           const result = await response.json();
-          localStorage.setItem('panier', JSON.stringify(result?.success));
-        } catch (error) {
-          console.error('Erreur:', error);
+          await AsyncStorage.setItem('panier', JSON.stringify(result?.success));
         }
-      };
+      } catch (error) {
+        console.error('Erreur:', error);
+      }
+    };
 
-      sendPanierData();
-    }
+    sendPanierData();
   }, []);
 
   const handleUsernameChange = (text: string) => {
@@ -56,16 +53,16 @@ const Connexion = () => {
   const handleSubmit = async () => {
     setError(null);
 
-    if (!connexion) {
-      setError("Erreur de configuration de l'authentification");
-      return;
-    }
-
+    // Simulation de la connexion
     try {
-      await connexion(username, password);
-      navigation.navigate('Home'); // Naviguer vers la page d'accueil ou la page souhaitée
+      if (username === 'test' && password === 'password') {
+        Alert.alert('Connexion réussie', 'Vous êtes maintenant connecté.');
+        router.push('/'); // Naviguer vers la page d'accueil ou la page souhaitée
+      } else {
+        Alert.alert('Erreur de connexion', 'Nom d\'utilisateur ou mot de passe incorrect');
+      }
     } catch (e) {
-      Alert.alert('Erreur de connexion', 'Nom d\'utilisateur ou mot de passe incorrect');
+      setError('Nom d\'utilisateur ou mot de passe incorrect');
     }
   };
 
@@ -92,7 +89,7 @@ const Connexion = () => {
         />
         <Button title="Connexion" onPress={handleSubmit} color="#FFD700" />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Inscription')}>
+        <TouchableOpacity onPress={() => router.push('/inscription')}>
           <Text style={styles.signupText}>
             Pas de compte? <Text style={styles.signupLink}>Inscription</Text>
           </Text>
