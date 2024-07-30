@@ -1,50 +1,57 @@
-# Welcome to your Expo app 👋
+**Description**
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+      AppMobile-Airneis est une application mobile de vente de meubles développée en React Native. Cette application permet aux utilisateurs de naviguer parmi les catégories de produits, de consulter les détails des       
+      produits, d'ajouter des produits au panier et de finaliser leurs achats.
 
-## Get started
+**Prérequis**
 
-1. Install dependencies
+   Un smartphone avec l'application Expo Go installée.
+   Node.js et npm installés sur votre machine.
+   Git installé sur votre machine.
+   
+**Installation**
 
-   ```bash
-   npm install
-   ```
+   **Clonez le dépôt :**
+   
+      git clone https://github.com/JovickT/AppMobile-Airneis.git
+      
+   **Installez les dépendances :**
+   
+      cd AppMobile-Airneis
+      
+      npm install
 
-2. Start the app
+   **Mettez à jour les dépendances :**
+   
+      npm update
 
-   ```bash
-    npx expo start
-   ```
+**Démarrage de l'application**
 
-In the output, you'll find options to open the app in a
+   **Lancez l'application avec Expo :**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+      npx expo start
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   **Scannez le QR Code :**
 
-## Get a fresh project
+      - Ouvrez l'application Expo Go sur votre smartphone.
+      - Scannez le QR Code affiché dans le terminal ou sur la page web ouverte par Expo.
 
-When you're ready, run:
+**Fonctionnalités**
+   - Navigation par catégories de produits.
+   - Consultation des détails des produits.
+   - Ajout de produits au panier.
+   - Gestion du panier (ajout, suppression, mise à jour des quantités).
+   - Finalisation de la commande avec saisie des informations de livraison et de paiement.
+   - Recherche de Produits par l'application de filtre.
 
-```bash
-npm run reset-project
-```
+**Technologies Utilisées**
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+   - React Native
+   - Expo
+   - Node.js
+   
+**Contribuer**
+   Les contributions sont les bienvenues !
 
-## Learn more
+**Licence**
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
